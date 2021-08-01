@@ -1,5 +1,6 @@
 import React from 'react';
 import LayoutUI from './LayoutUI';
+import MenuUI from '../ScrollBar/MenuUI';
 
 class Layout extends React.Component
 {
@@ -7,7 +8,7 @@ class Layout extends React.Component
     {
         return (
             <div>
-              <LayoutUI />
+              <LayoutUI menu={<MenuUI/>}/>
             </div>
         );
     }

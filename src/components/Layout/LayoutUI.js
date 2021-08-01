@@ -124,8 +124,8 @@ export default function Album(props) {
   const DROPBOX=(<div {...getRootProps({className: 'dropzone'})}>
   <input {...getInputProps()} />
   <br />
-  <p>Drag 'n' drop some files here, or click to select files</p>
-  <em>(Only *.jpeg and *.png images will be accepted)</em>
+  <p>Drag 'n' drop some files here, or click to select files
+  <em>(Only *.jpeg and *.png images will be accepted)</em></p>
   <br />
 </div>);
 
@@ -139,6 +139,7 @@ export default function Album(props) {
             Image Gallery
           </Typography>
         </Toolbar>
+        {props.menu}
       </AppBar>
       <main>
         {/* Hero unit */}
@@ -147,7 +148,7 @@ export default function Album(props) {
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
               Album layout
             </Typography>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
+            <Typography variant="h5" align="center" color="textSecondary" paragraph >
              <DBContainer dropbox={DROPBOX}/> 
             </Typography>
           
