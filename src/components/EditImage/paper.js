@@ -1,8 +1,6 @@
-import React,{useState,useCallback} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import ButtonGUI from './buttonGroup';
-import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,31 +18,20 @@ const useStyles = makeStyles((theme) => ({
   },
   Row : {
     display: "table",
-    width: "100%",/*Optional*/
-    tableLayout: "fixed",/*Optional*/
-    borderSpacing: "10px" /*Optional*/
+    width: "100%",
+    tableLayout: "fixed",
+    borderSpacing: "10px" 
 },
 Column : {
-    display: "table-cell", /*Optional*/
+    display: "table-cell",
 }
 }));
 
 
 export default function SimplePaper(props) {
   const classes = useStyles();
- const [crop,setCrop]=React.useState({
-    disabled: false,
-    locked: false,
-    unit: 'px',
-    x: 0,
-    y: 0,
-    width: 200,
-    height: 200
- });
 
- const handleCrop = (crop)=>{
-     setCrop({crop});
- }
+
   return (
     <div className={classes.root}>
       <Paper elevation={3} className={classes.Column}>
@@ -55,7 +42,6 @@ export default function SimplePaper(props) {
               <br />
               <br/>
               <br />
-              <ButtonGUI/>
               </Paper>
           <Paper elevation={3}  className={classes.Column}>
          <h2><b>Cropped Image</b></h2> 

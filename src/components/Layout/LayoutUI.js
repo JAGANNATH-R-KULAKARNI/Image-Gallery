@@ -3,7 +3,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -50,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   cardMedia: {
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '56.25%', 
   },
   cardContent: {
     flexGrow: 1,
@@ -60,39 +59,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(6),
   },
 }));
-
-const thumbsContainer = {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginTop: 16
-  };
-  
-  const thumb = {
-    display: 'inline-flex',
-    borderRadius: 2,
-    border: '1px solid #eaeaea',
-    marginBottom: 8,
-    marginRight: 8,
-    width: 100,
-    height: 100,
-    padding: 4,
-    boxSizing: 'border-box'
-  };
-  
-  const thumbInner = {
-    display: 'flex',
-    minWidth: 0,
-    overflow: 'hidden'
-  };
-  
-  const img = {
-    display: 'block',
-    width: 'auto',
-    height: '100%'
-  };
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 
 export default function Album(props) {
@@ -106,16 +72,7 @@ export default function Album(props) {
       })));
     }
   });
-  const thumbs = files.map(file => (
-    <div style={thumb} key={file.name}>
-      <div style={thumbInner}>
-        <img
-          src={file.preview}
-          style={img}
-        />
-      </div>
-    </div>
-  ));
+
 
   useEffect(() => () => {
     files.forEach(file => URL.revokeObjectURL(file.preview));
@@ -142,7 +99,6 @@ export default function Album(props) {
         {props.menu}
       </AppBar>
       <main>
-        {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
@@ -179,14 +135,6 @@ export default function Album(props) {
                     {file.name}
                     </Typography>
                   </CardContent>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                      View
-                    </Button>
-                    <Button size="small" color="primary">
-                      Edit
-                    </Button>
-                  </CardActions>
                 </Card>
               </Grid>
             ))}
@@ -195,14 +143,12 @@ export default function Album(props) {
         </Container>
       </main>
             
-      {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
           Image Gallery
         </Typography>
         <Copyright />
       </footer>
-      {/* End footer */}
     </React.Fragment>
   );
 }

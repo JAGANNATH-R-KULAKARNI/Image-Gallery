@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import EditLayout from './EditLayout';
-import Button from '@material-ui/core/Button';
 
 class Edit extends PureComponent {
   state = {

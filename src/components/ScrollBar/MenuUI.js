@@ -1,11 +1,7 @@
-import React,{useState} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import FolderIcon from '@material-ui/icons/Folder';
@@ -19,9 +15,6 @@ const useStyles = makeStyles({
 export default function SimpleBottomNavigation(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const pageIndex = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const [leastPageIndex,setLPI]=React.useState(1);
-  const [mostPageIndex,setMPI]=React.useState(6);
   const [arrayIndex,setArrayIndex]=React.useState([1,2,3,4,5]);
   const NavArrays=[
     <BottomNavigationAction label="1" icon={<FolderIcon />} /> ,
