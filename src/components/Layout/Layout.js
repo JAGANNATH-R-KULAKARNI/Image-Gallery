@@ -1,6 +1,5 @@
 import React from 'react';
 import LayoutUI from './LayoutUI';
-import DropBox from '../DropBox/DropBox';
 
 class Layout extends React.Component
 {
@@ -8,7 +7,7 @@ class Layout extends React.Component
     {
         return (
             <div>
-              <LayoutUI dropbox={<DropBox />} />
+              <LayoutUI />
             </div>
         );
     }

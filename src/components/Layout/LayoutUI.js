@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useEffect, useState} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import {useDropzone} from 'react-dropzone';
+import DBContainer from './DropBoxContainer';
 
 function Copyright() {
   return (
@@ -59,10 +61,73 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const thumbsContainer = {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 16
+  };
+  
+  const thumb = {
+    display: 'inline-flex',
+    borderRadius: 2,
+    border: '1px solid #eaeaea',
+    marginBottom: 8,
+    marginRight: 8,
+    width: 100,
+    height: 100,
+    padding: 4,
+    boxSizing: 'border-box'
+  };
+  
+  const thumbInner = {
+    display: 'flex',
+    minWidth: 0,
+    overflow: 'hidden'
+  };
+  
+  const img = {
+    display: 'block',
+    width: 'auto',
+    height: '100%'
+  };
+
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
 
 export default function Album(props) {
   const classes = useStyles();
+  const [files, setFiles] = useState([]);
+  const {getRootProps, getInputProps} = useDropzone({
+    accept: 'image/jpeg, image/png',
+    onDrop: acceptedFiles => {
+      setFiles(acceptedFiles.map(file => Object.assign(file, {
+        preview: URL.createObjectURL(file)
+      })));
+    }
+  });
+  const thumbs = files.map(file => (
+    <div style={thumb} key={file.name}>
+      <div style={thumbInner}>
+        <img
+          src={file.preview}
+          style={img}
+        />
+      </div>
+    </div>
+  ));
+
+  useEffect(() => () => {
+    files.forEach(file => URL.revokeObjectURL(file.preview));
+  }, [files]);
+
+  const DROPBOX=(<div {...getRootProps({className: 'dropzone'})}>
+  <input {...getInputProps()} />
+  <br />
+  <p>Drag 'n' drop some files here, or click to select files</p>
+  <em>(Only *.jpeg and *.png images will be accepted)</em>
+  <br />
+</div>);
 
   return (
     <React.Fragment>
@@ -83,8 +148,9 @@ export default function Album(props) {
               Album layout
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              {props.dropbox}
+             <DBContainer dropbox={DROPBOX}/> 
             </Typography>
+          
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justifyContent="center">
                 <Grid item>
@@ -102,22 +168,19 @@ export default function Album(props) {
           </Container>
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
-          {/* End hero unit */}
+
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+            {files.map((file) => (
+              <Grid item  key={file.name} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
-                  <CardMedia
+                <CardMedia
                     className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
+                    image={file.preview}
+                    title={file.name}
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Heading
-                    </Typography>
-                    <Typography>
-                      This is a media card. You can use this section to describe the content.
+                    {file.name}
                     </Typography>
                   </CardContent>
                   <CardActions>
@@ -132,8 +195,10 @@ export default function Album(props) {
               </Grid>
             ))}
           </Grid>
+            
         </Container>
       </main>
+            
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
