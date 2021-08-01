@@ -146,7 +146,7 @@ export default function Album(props) {
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Album layout
+              Album {props.index}
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph >
              <DBContainer dropbox={DROPBOX}/> 
@@ -155,13 +155,8 @@ export default function Album(props) {
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justifyContent="center">
                 <Grid item>
-                  <Button variant="contained" color="primary">
-                    Main call to action
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="outlined" color="primary">
-                    Secondary action
+                  <Button variant="contained" color="primary" onClick={props.editStatusHandler}>
+                    Edit an Image
                   </Button>
                 </Grid>
               </Grid>

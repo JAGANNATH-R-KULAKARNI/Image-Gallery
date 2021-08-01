@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SimpleBottomNavigation() {
+export default function SimpleBottomNavigation(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const pageIndex = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -101,9 +101,10 @@ export default function SimpleBottomNavigation() {
       <div>
     <BottomNavigation
       value={value}
-      onChange={(event, newValue) => {
-        setValue(newValue);
-        console.log("here inside value chage"+value)
+      onChange={async (event, newValue) => {
+        await setValue(newValue);
+        console.log("here inside value chage"+newValue);
+        props.setPageIndex(arrayIndex[newValue-1]);
       }}
       showLabels
       className={classes.root}
